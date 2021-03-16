@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script
+      src="https://test-bankalfalah.gateway.mastercard.com/checkout/version/56/checkout.js"
+      id="bank-script02"
+      data-error="errorCallback"
+      data-cancel="cancelCallback"
+      data-complete="http://localhost:3000/checkout"
+      data-afterRedirect="restorePageState"
+    ></script>
+    <script>
+      function errorCallback(error) {
+        console.log("fasdasdasd");
+        console.log(JSON.stringify(error));
+      }
+      function cancelCallback() {
+        console.log("Payment cancelled");
+      }
+      function restorePageState(data) {
+        console.log(data);
+      }
+
+      function showPaymentPage(order_id, amount) {
+        Checkout.configure({
+          session: {
+            id: "SESSION0002287035696F1921494G51",
+          },
+          merchant: "BabyNest",
+          order: {
+            amount: amount,
+            currency: "PKR",
+            id: order_id,
+          },
+          interaction: {
+            merchant: {
+              name: "BabyNest",
+            },
+            operation: "PURCHASE",
+          },
+        });
+        Checkout.showPaymentPage();
+      }
+      function showLightBox(order_id) {
+        Checkout.showLightbox();
+      }
+    </script>
+  </head>
+</html>
